@@ -1,0 +1,54 @@
+DS. Trabajo Práctico Final 4°AO
+
+
+Título del TP: Book-a-book
+
+Integrantes del grupo: 
+Aguirre, Simón (referente)
+Corales, Manuel.
+
+Alcances del TP: 
+Módulo compra-venta
+Suscripción mensual
+Módulo de usuario (registro, modificación de perfil, entre otros)
+
+Lenguaje a utilizar: Vb.net
+
+Tiempo de desarrollo: 30 septiembre, 2020 - 11 de noviembre, 2020.
+
+Documentación: (A completar)
+
+
+
+- Base de Datos, Tablas:
+
+- Pregunte cuanta huita queres usar durante la sesión
+- Cuando se crea la cuenta te da un monto aleatorio dentro de cierto rango
+- Plata infinita
+	-> Porque la carga con la tarjeta
+	-> O ni siquiera. Viene precocido
+
+-CAMEL CASE-
+
+Usuarios:
+ID
+Usuario
+Password
+Nombre
+Apellido
+Correo
+DNI(Opcional)
+EstaSuscripto
+NumeroDeTarjeta(A definir)
+
+Libros:
+ID
+Título
+Autor
+Descripción
+Stock
+Precio
+
+
+Generos(opcional o futura mejora)
+Libros_Genero(opcional)
