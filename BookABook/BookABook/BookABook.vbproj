@@ -70,11 +70,41 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.vb">
+    <Compile Include="frmCargaSaldo.Designer.vb">
+      <DependentUpon>frmCargaSaldo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCargaSaldo.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="frmDePago.Designer.vb">
+      <DependentUpon>frmDePago.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDePago.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFichaProducto.Designer.vb">
+      <DependentUpon>frmFichaProducto.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmFichaProducto.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLanding.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLanding.Designer.vb">
+      <DependentUpon>frmLanding.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPerfilUsuarioo.Designer.vb">
+      <DependentUpon>frmPerfilUsuarioo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPerfilUsuarioo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmResultadosBusqueda.Designer.vb">
+      <DependentUpon>frmResultadosBusqueda.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmResultadosBusqueda.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -94,6 +124,24 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmCargaSaldo.resx">
+      <DependentUpon>frmCargaSaldo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDePago.resx">
+      <DependentUpon>frmDePago.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFichaProducto.resx">
+      <DependentUpon>frmFichaProducto.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLanding.resx">
+      <DependentUpon>frmLanding.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPerfilUsuarioo.resx">
+      <DependentUpon>frmPerfilUsuarioo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmResultadosBusqueda.resx">
+      <DependentUpon>frmResultadosBusqueda.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
