@@ -12,7 +12,7 @@ Módulo compra-venta
 Suscripción mensual
 Módulo de usuario (registro, modificación de perfil, entre otros)
 
-Lenguaje a utilizar: Vb.net
+Lenguaje a utilizar: JavaScript
 
 Tiempo de desarrollo: 30 septiembre, 2020 - 11 de noviembre, 2020.
 

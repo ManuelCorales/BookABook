@@ -1,0 +1,26 @@
+{
+  "name": "bookabook",
+  "version": "1.0.0",
+  "description": "ecommerce of books",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ManuelCorales/BookABook.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ManuelCorales/BookABook/issues"
+  },
+  "homepage": "https://github.com/ManuelCorales/BookABook#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.11.0",
+    "graphql": "^15.3.0",
+    "mysql": "^2.18.1"
+  }
+}
