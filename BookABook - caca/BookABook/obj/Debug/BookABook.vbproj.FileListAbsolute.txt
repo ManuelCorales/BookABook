@@ -1,1 +1,2 @@
 C:\Users\manue\Desktop\Cole\Desarrollo de sistemas\BookABook\BookABook\BookABook\bin\Debug\BookABook.exe.config
+C:\Users\manue\Desktop\Cole\Desarrollo de sistemas\BookABook\BookABook - caca\BookABook\bin\Debug\BookABook.exe.config

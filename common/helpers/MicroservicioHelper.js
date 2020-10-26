@@ -6,52 +6,48 @@ const path = require('path')
 require('dotenv').config({path:"../../.env"});
 
 class MicroservicioBase{
-    constructor(puerto){
+    constructor(){
         // Conexión con mysql
-        var con = mysql.createConnection({
+        this.con = mysql.createConnection({
             host: `${process.env.DB_HOST}`,
             user: `${process.env.DB_USER}`,
             password: `${process.env.DB_PASS}`
         });
 
-        con.connect(function(err) {
+        this.con.connect(function(err) {
             if (err) throw err;
             console.log("Conectadooo!");
         });
 
+        this.con.query(`USE ${process.env.DB_NAME};`, (err, result) =>{
+            if (err) throw err;
+        })
+    }
+
+    initGraphQL(puerto, schema, root){
         // Construct a schema, using GraphQL schema language
-        var schema = buildSchema(`
-        type Query {
-            hello: String
-        }
-        `);
-
-        // The root provides a resolver function for each API endpoint
-        var root = {
-            hello: () => {
-                return 'Hello world!';
-            },
-        };
-
+        var schema = buildSchema(schema);
         var app = express();
-        app.use('/graphql', graphqlHTTP({
+        app.use('/', graphqlHTTP({
             schema: schema,
             rootValue: root,
             graphiql: true,
         }));
         app.listen(puerto);
-        console.log(`Running a GraphQL API server at http://localhost:${puerto}/graphql`);
+        console.log(`Corriendo en el puerto: http://localhost:${puerto}/`);
     }
     
-    consulta(query){
-        query = "SELECT * FROM usuarios;"
-        con.query(`USE ${process.env.DB_HOST};`, (err, result) =>{
-            console.log(err, result);
+    async consulta(query, callback){
+        let resultado = await new Promise((resolve, reject) => {
+            this.con.query(query, async (err, result) =>{
+                if(!err){
+                    resolve(result);
+                } else {
+                    reject(err);
+                }
+            })
         })
-
-        con.query(query, (err, result) =>{
-            console.log(err, result);
-        })
+        return resultado;
     }
 }
 
