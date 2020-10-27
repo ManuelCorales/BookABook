@@ -4,6 +4,7 @@ var { graphqlHTTP } = require('express-graphql');
 var { buildSchema } = require('graphql');
 const path = require('path')
 require('dotenv').config({path:"../../.env"});
+const cors = require('cors')
 
 class MicroservicioBase{
     constructor(){
@@ -28,6 +29,7 @@ class MicroservicioBase{
         // Construct a schema, using GraphQL schema language
         var schema = buildSchema(schema);
         var app = express();
+        app.use(cors());
         app.use('/', graphqlHTTP({
             schema: schema,
             rootValue: root,

@@ -29,7 +29,7 @@ class LibrosService extends MicroservicioBase{
     }
 
     root = {
-        libros: async () => {
+        libros: async (req) => {
             let resultado = await this.consulta(`SELECT * FROM libros`);
             return resultado;
         },

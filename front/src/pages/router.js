@@ -16,7 +16,7 @@ function router() {
                     path="/home"
                     component={landingPage} />
                 <Route
-                    path="/ficha"
+                    path="/libro"
                     component={fichaProductoPage} />
                 <Route     
                     path="/paginanoencontrada"
