@@ -12,7 +12,8 @@ class LibrosService extends MicroservicioBase{
             type Query {
                 libros: [Libro]
                 mensajePrueba: String
-                busquedaRapida(busqueda: String): [Libro] 
+                busquedaRapida(busqueda: String!): [Libro]
+                libroPorSlug(slug: String!): Libro
             }
 
             type Libro{
@@ -29,12 +30,16 @@ class LibrosService extends MicroservicioBase{
 
     root = {
         libros: async () => {
-            let resultado = this.consulta(`SELECT * FROM libros`);
+            let resultado = await this.consulta(`SELECT * FROM libros`);
             return resultado;
         },
         busquedaRapida: async (req) => {
-            let resultado = this.consulta(`SELECT * FROM libros WHERE titulo LIKE '${req.busqueda}'`);
+            let resultado = await this.consulta(`SELECT * FROM libros WHERE titulo OR autor LIKE '%${req.busqueda}%'`);
             return resultado;
+        },
+        libroPorSlug: async (req) => {
+            let resultado = await this.consulta(`SELECT * FROM libros WHERE slug = '${req.slug}'`);
+            return resultado[0];
         },
         mensajePrueba: () => {
             return "xd"

@@ -1,0 +1,3 @@
+ALTER TABLE `libros`
+	ADD COLUMN `slug` VARCHAR(100) NULL DEFAULT NULL AFTER `precio`,
+	ADD UNIQUE INDEX `slug` (`slug`);
