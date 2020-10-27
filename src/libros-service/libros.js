@@ -12,6 +12,7 @@ class LibrosService extends MicroservicioBase{
             type Query {
                 libros: [Libro]
                 mensajePrueba: String
+                busquedaRapida(busqueda: String): [Libro] 
             }
 
             type Libro{
@@ -22,12 +23,17 @@ class LibrosService extends MicroservicioBase{
                 stock: Int
                 precio: Float
             }
+
         `)
     }
 
     root = {
         libros: async () => {
             let resultado = this.consulta(`SELECT * FROM libros`);
+            return resultado;
+        },
+        busquedaRapida: async (req) => {
+            let resultado = this.consulta(`SELECT * FROM libros WHERE titulo LIKE '${req.busqueda}'`);
             return resultado;
         },
         mensajePrueba: () => {

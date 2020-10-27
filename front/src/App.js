@@ -1,8 +1,7 @@
 import './App.css';
 import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import landing from './pages/landing'
 import ConsultaMicroservicio from './helpers/consultaMicroservicioHelper'
+import Router from './pages/router'
 
 class App extends React.Component {
   constructor(){
@@ -16,30 +15,8 @@ class App extends React.Component {
 
   render(){
     return (
-    
       <div className="App">
-        <BrowserRouter>
-          <div>
-            {/* <NavBar /> */}
-            {/* <Redirect
-              path="/"
-              to="/home" /> */}
-            <Switch>
-              <Route
-                path="/home"
-                component={landing} />
-              {/* <Route
-                exact
-                path="/page1"
-                render={() => <Page1 name="React Medellín" />} />
-              <Route
-                exact
-                path="/page2"
-                render={() => <Page2 />} /> */}
-              <Route component={() => <div> No encontrado sorry /: </div>} />
-            </Switch>
-          </div>
-        </BrowserRouter>
+        <Router />
         <header className="App-header">
           <p>
             <a href="landing">

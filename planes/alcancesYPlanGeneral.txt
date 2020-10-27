@@ -22,7 +22,7 @@ Documentación: (A completar)
 
 - Base de Datos, Tablas:
 
-- Pregunte cuanta huita queres usar durante la sesión
+- Pregunte cuanta guita queres usar durante la sesión
 - Cuando se crea la cuenta te da un monto aleatorio dentro de cierto rango
 - Plata infinita
 	-> Porque la carga con la tarjeta
@@ -49,6 +49,11 @@ Descripción
 Stock
 Precio
 
+1- (26/10 - 1/11): Formulario de landing - registro - ficha de producto (Más importantes) - resultado busqueda
+
+2- (2/11 - 8/11): Módulo de compra: frm formulario de pago carga saldo - perfil usuario (opcional)
+
+3- Embellecer todo
 
 Generos(opcional o futura mejora)
 Libros_Genero(opcional)
