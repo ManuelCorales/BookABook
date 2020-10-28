@@ -2,8 +2,8 @@
 import Button from '@material-ui/core/Button';
 import ConsultaMicroservicioHelper from '../helpers/consultaMicroservicioHelper';
 import React from 'react';
-
-class Landing extends React.Component {
+import PaginaGenerica from '../components/paginaGenerica'
+class Landing extends PaginaGenerica {
     constructor(){
 		super();
 		this.state = {

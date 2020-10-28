@@ -1,11 +1,11 @@
 import Button from '@material-ui/core/Button';
 import ConsultaMicroservicioHelper from '../helpers/consultaMicroservicioHelper';
 import React from 'react';
+import PaginaGenerica from '../components/paginaGenerica'
 
-class FichaProductoPage extends React.Component {
+class FichaProductoPage extends PaginaGenerica {
     constructor(props){
         super(props);
-        console.log(6, props);
 		this.state = {
 			libro: {},
 		}
@@ -29,10 +29,10 @@ class FichaProductoPage extends React.Component {
             <div className="App">
               <header className="App-header">
                 <p>
-                <Button variant="contained" color="primary">
-                      un botón
-                  </Button>
-                  Estas en la ficha del producto {this.state.libro.titulo}
+                    <Button variant="contained" color="primary">
+                        un botón
+                    </Button>
+                    Estas en la ficha del producto {this.state.libro.titulo}
                 </p>
               </header>
             </div>
