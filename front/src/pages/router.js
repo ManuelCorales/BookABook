@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import landingPage from './landingPage';
-import fichaProductoPage from './fichaProductoPage';
+import LandingPage from './landingPage';
+import FichaProductoPage from './fichaProductoPage';
 import paginaNoEncontradaPage from './paginaNoEncontradaPage';
 import registroPage from './registroPage';
 
@@ -14,18 +14,18 @@ function router() {
                 </Route>
                 <Route
                     path="/home"
-                    component={landingPage} />
+                    component={LandingPage} />
                 <Route
-                    path="/libro"
-                    component={fichaProductoPage} />
+                    path="/libro/:slug"
+                    component={FichaProductoPage} />
                 <Route     
                     path="/paginanoencontrada"
                     component={paginaNoEncontradaPage} />
                 <Route     
                     path="/registro"
                     component={registroPage} />
-                <Redirect
-                    to="/paginanoencontrada" />
+                {/* <Redirect
+                    to="/paginanoencontrada" /> */}
             </Switch>
           </div>
         </BrowserRouter>

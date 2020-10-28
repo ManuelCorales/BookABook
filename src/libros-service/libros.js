@@ -20,6 +20,7 @@ class LibrosService extends MicroservicioBase{
                 id: ID
                 titulo: String
                 autor: String
+                slug: String
                 descripcion: String
                 stock: Int
                 precio: Float
