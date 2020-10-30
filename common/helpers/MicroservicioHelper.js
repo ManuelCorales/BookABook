@@ -45,6 +45,7 @@ class MicroservicioBase{
                 if(!err){
                     resolve(result);
                 } else {
+                    console.log(err);
                     reject(err);
                 }
             })

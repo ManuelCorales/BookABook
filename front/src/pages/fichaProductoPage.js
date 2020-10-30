@@ -1,9 +1,10 @@
 import Button from '@material-ui/core/Button';
 import ConsultaMicroservicioHelper from '../helpers/consultaMicroservicioHelper';
 import React from 'react';
-import PaginaGenerica from '../components/paginaGenerica'
+import PadrePaginas from '../components/padrePaginas'
+import PlantillaPaginaGenerica from '../components/plantillaPaginaGenerica';
 
-class FichaProductoPage extends PaginaGenerica {
+class FichaProductoPage extends PadrePaginas {
     constructor(props){
         super(props);
 		this.state = {
@@ -13,7 +14,7 @@ class FichaProductoPage extends PaginaGenerica {
     
     async componentDidMount(){
         let query = {
-            "query": `query getLibro($slug: String!) {libroPorSlug (slug: $slug) {id titulo}}`,
+            "query": `query getLibro($slug: String!) {libroPorSlug (slug: $slug) {id titulo descripcion}}`,
             "variables": {
                 "slug": this.props.match.params.slug
             }
@@ -27,14 +28,19 @@ class FichaProductoPage extends PaginaGenerica {
     render(){
         return (
             <div className="App">
-              <header className="App-header">
-                <p>
-                    <Button variant="contained" color="primary">
-                        un botón
-                    </Button>
-                    Estas en la ficha del producto {this.state.libro.titulo}
-                </p>
-              </header>
+                <PlantillaPaginaGenerica>
+                    <header className="App-header">
+                        <p>
+                            <Button variant="contained" color="primary">
+                                un botón
+                            </Button>
+                            Estas en la ficha del producto {this.state.libro.titulo}
+                            <br>
+                            </br>
+                            La descripción es: {this.state.libro.descripcion}
+                        </p>
+                    </header>
+                </PlantillaPaginaGenerica>
             </div>
         );
     }   
