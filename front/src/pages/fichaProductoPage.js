@@ -8,21 +8,31 @@ class FichaProductoPage extends PadrePaginas {
     constructor(props){
         super(props);
 		this.state = {
-			libro: {},
+			libro: {
+                titulo: "Cargando...",
+                descripcion: "Cargando..."
+            },
 		}
     }
     
     async componentDidMount(){
         let query = {
-            "query": `query getLibro($slug: String!) {libroPorSlug (slug: $slug) {id titulo descripcion}}`,
+            "query": `query getLibro($slug: String!) {libroPorSlug (slug: $slug) {id titulo slug descripcion}}`,
             "variables": {
                 "slug": this.props.match.params.slug
             }
         }
         let respuesta = await ConsultaMicroservicioHelper(query, 3002);
+        if(!respuesta.data.libroPorSlug){
+            window.location.href = "/paginanoencontrada";
+        }
 		this.setState({
 			libro: respuesta.data.libroPorSlug,
-		})
+		});
+    }
+
+    handlerComprar(){
+
     }
 
     render(){
@@ -31,8 +41,8 @@ class FichaProductoPage extends PadrePaginas {
                 <PlantillaPaginaGenerica>
                     <header className="App-header">
                         <p>
-                            <Button variant="contained" color="primary">
-                                un botón
+                            <Button variant="contained" color="primary" onClick={() => window.location.href="/comprar/" + this.state.libro.slug} >
+                                Comprar
                             </Button>
                             Estas en la ficha del producto {this.state.libro.titulo}
                             <br>

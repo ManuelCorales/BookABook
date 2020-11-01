@@ -8,8 +8,9 @@ class LoginPage extends React.Component {
     constructor(props){
         super(props);
         const cookies = new Cookies();
-        let usuario = cookies.get('usuario');
-        if(usuario){
+        let id_usuario = cookies.get('id_usuario');
+        console.log(12, id_usuario);
+        if(id_usuario){
             window.location.href = "/"
         }
         this.state = {
@@ -45,8 +46,9 @@ class LoginPage extends React.Component {
         )
         if(resultado.data.validarLogin.resultado){
             const cookies = new Cookies();
-            cookies.set("usuario", resultado.data.validarLogin.usuario.usuario);
-            this.setState({ errores: [] })
+            cookies.set("id_usuario", resultado.data.validarLogin.usuario.id);
+            this.setState({ errores: [] });
+            window.location.href = "/home";
         } else {
             this.setState({ errores: resultado.data.validarLogin.errores });
         }
@@ -76,7 +78,6 @@ class LoginPage extends React.Component {
                 }
             }, 3001
         )
-        console.log(67, resultado);
         if(resultado.data.registrarUsuario.resultado){
             const cookies = new Cookies();
             cookies.set("usuario", resultado.data.registrarUsuario.usuario.usuario);
@@ -107,7 +108,7 @@ class LoginPage extends React.Component {
                             <TextField name="usuario" variant="outlined" label="Usuario" value={this.state.datosLogin.usuario} onChange={this.actualizarCampo} />
                             <TextField name="nombre" variant="outlined" label="Nombre" value={this.state.datosLogin.nombre} onChange={this.actualizarCampo} />
                             <TextField name="apellido" variant="outlined" label="Apellido" value={this.state.datosLogin.apellido} onChange={this.actualizarCampo} />
-                            <TextField name="password" variant="outlined" label="Usuario" value={this.state.datosLogin.password} onChange={this.actualizarCampo} />
+                            <TextField name="password" variant="outlined" label="Password" value={this.state.datosLogin.password} onChange={this.actualizarCampo} />
                             <TextField name="dni" variant="outlined" label="DNI" value={this.state.datosLogin.dni} onChange={this.actualizarCampo} />
                             <TextField name="correo" variant="outlined" label="Correo" value={this.state.datosLogin.correo} onChange={this.actualizarCampo} />
                             <Button variant="contained" color="primary" onClick={this.handlerRegistarUsuario} >

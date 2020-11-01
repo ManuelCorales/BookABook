@@ -23,6 +23,7 @@ class UsuariosService extends MicroservicioBase{
                 correo: String
                 DNI: Int
                 numeroDeTarjeta: Int
+                estasuscripto: Boolean
             }
 
             input InputDatosLogin {

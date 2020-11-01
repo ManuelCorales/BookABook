@@ -1,6 +1,8 @@
 import ConsultaMicroservicioHelper from '../helpers/consultaMicroservicioHelper';
 import AutoSuggest from 'react-autosuggest';
 import React from 'react';
+import Button from '@material-ui/core/Button';
+
 
 class Header extends React.Component {
     constructor(){
@@ -59,6 +61,9 @@ class Header extends React.Component {
 						renderSuggestion={(suggestion) => this.renderSuggestion(suggestion)}
 						inputProps={{placeholder: "Buscá tu libro...", value: this.state.textoAutosuggest, onChange: (e, valor) => this.setState({textoAutosuggest: valor.newValue})}}
 					/>
+					<Button onClick={() => window.location.href="/perfil"}>
+						Ir al perfil
+					</Button>
 					</p>
 			  	</header>
 			</div>

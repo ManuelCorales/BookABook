@@ -3,6 +3,8 @@ import LandingPage from './landingPage';
 import FichaProductoPage from './fichaProductoPage';
 import paginaNoEncontradaPage from './paginaNoEncontradaPage';
 import LoginPage from './loginPage';
+import PerfilPage from './perfilPage';
+import CompraPage from './compraPage'
 import React from 'react';
 
 class Router extends React.Component {
@@ -24,14 +26,20 @@ class Router extends React.Component {
                     <Route
                         path="/libro/:slug"
                         component={FichaProductoPage} />
+                    <Route
+                        path="/perfil"
+                        component={PerfilPage} />
+                    <Route
+                        path="/comprar/:slug"
+                        component={CompraPage} />
                     <Route     
                         path="/paginanoencontrada"
                         component={paginaNoEncontradaPage} />
                     <Route     
                         path="/login"
                         component={LoginPage} />
-                    {/* <Redirect
-                        to="/paginanoencontrada" /> */}
+                    <Redirect
+                        to="/paginanoencontrada" />
                 </Switch>
               </div>
             </BrowserRouter>
