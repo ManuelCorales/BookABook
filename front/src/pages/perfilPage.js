@@ -27,17 +27,26 @@ class PerfilPage extends PadrePaginas {
         let id_usuario = cookies.get('id_usuario');
 		let respuesta = await ConsultaMicroservicioHelper(
             {
-                "query": `query traerDatosUsuario($id: ID!) {usuarioPorId (idUsuario: $id) {id usuario nombre apellido correo estasuscripto }}`,
+                "query": `query traerDatosUsuario($id: ID!) {usuarioPorId (idUsuario: $id) {id usuario nombre apellido correo estasuscripto libros { id titulo autor slug } }}`,
                 "variables": {
                     "id": id_usuario
                 }
             }, 3001);
-        this.setState({ usuario: respuesta.data.usuarioPorId })
+        console.log(35, respuesta);
+        this.setState({ usuario: respuesta.data.usuarioPorId });
 	}
 
-    handlerSuscripcion(){
+    async handlerSuscripcion(){
         this.setState({seSuscribio: true});
-        setTimeout(() => { this.setState({dialogSuscripcionAbierto: false}) }, 2000);
+        let respuesta = await ConsultaMicroservicioHelper(
+            {
+                "query": `mutation actualizarSuscripcion($id: ID!) {habilitarSuscripcion (idUsuario: $id) {id usuario nombre apellido correo estasuscripto libros { id titulo autor slug } }}`,
+                "variables": {
+                    "id": this.state.usuario.id,
+                }
+            }, 3001);
+            console.log(47, respuesta);
+        setTimeout(() => { this.setState({dialogSuscripcionAbierto: false, usuario: respuesta.data.habilitarSuscripcion}) }, 2000);
     }
 
 	render(){
@@ -51,11 +60,16 @@ class PerfilPage extends PadrePaginas {
                             {this.state.usuario.nombre}
                             <br/>
                             {this.state.usuario.apellido}
-                            <Button variant="contained" color="primary" onClick={() => this.setState({dialogSuscripcionAbierto: true})}>
-                                Suscribirse
-                            </Button>
-                            {console.log(52, this.state.dialogSuscripcionAbierto)}
-
+                            {
+                                this.state.usuario.estasuscripto === true ?
+                                <div>
+                                    Usted ya está suscripto
+                                </div>
+                                :
+                                <Button variant="contained" color="primary" onClick={() => this.setState({dialogSuscripcionAbierto: true})}>
+                                    Suscribirse
+                                </Button>
+                            }
                             <Dialog open={this.state.dialogSuscripcionAbierto} onClose={() => this.setState({dialogSuscripcionAbierto: false})}>
                                 { this.state.seSuscribio ?
                                     <>

@@ -5,6 +5,7 @@ var { buildSchema } = require('graphql');
 const path = require('path')
 require('dotenv').config({path:"../../.env"});
 const cors = require('cors')
+const fetch = require('node-fetch');
 
 class MicroservicioBase{
     constructor(){
@@ -51,6 +52,26 @@ class MicroservicioBase{
             })
         })
         return resultado;
+    }
+    async consultarMicroservicio(query, puerto){
+        /* 
+            Ejemplo que query 
+                let query = {
+                    "query": `query getLibro($slug: String!) {libroPorSlug (slug: $slug) {id titulo}}`,
+                    "variables": {
+                        "slug": "100-anos-de-soledad"
+                    }
+                }
+        */
+        const response = await fetch(`http://localhost:${puerto}/`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(query),
+        });
+        let respuesta = await response.json().then((data)=> data);
+        return respuesta;
     }
 }
 
