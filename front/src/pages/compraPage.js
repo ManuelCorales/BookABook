@@ -13,8 +13,11 @@ class CompraPage extends PadrePaginas {
                 nombre: "Cargando...",
                 apellido: "Cargando...",
                 correo: "Cargando...",
+                saldo: "Cargando...",
             },
-            libro: {},
+            libro: {
+                precio: "Cargando...",
+            },
 		}
     }
     
@@ -23,14 +26,14 @@ class CompraPage extends PadrePaginas {
         let id_usuario = cookies.get('id_usuario');
 		let respuestaUsuario = await ConsultaMicroservicioHelper(
             {
-                "query": `query traerDatosUsuario($id: ID!) {usuarioPorId (idUsuario: $id) {id usuario nombre apellido correo}}`,
+                "query": `query traerDatosUsuario($id: ID!) {usuarioPorId (idUsuario: $id) {id usuario nombre apellido correo saldo}}`,
                 "variables": {
                     "id": id_usuario
                 }
             }, 3001);
 
         let query = {
-            "query": `query getLibro($slug: String!) {libroPorSlug (slug: $slug) {id titulo descripcion}}`,
+            "query": `query getLibro($slug: String!) {libroPorSlug (slug: $slug) {id titulo descripcion precio}}`,
             "variables": {
                 "slug": this.props.match.params.slug
             }
@@ -57,11 +60,12 @@ class CompraPage extends PadrePaginas {
                             {this.state.usuario.nombre}
                             <br/>
                             {this.state.usuario.apellido}
-
-                            Tu tarjeta es:
                             <br/>
                             Tu saldo es:
-
+                            {this.state.usuario.saldo}
+                            <br/>
+                            El libro cuesta:
+                            {this.state.libro.precio}
 						</p>
 					</header>
 			</div>

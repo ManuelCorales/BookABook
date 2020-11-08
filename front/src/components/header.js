@@ -64,6 +64,9 @@ class Header extends React.Component {
 					<Button onClick={() => window.location.href="/perfil"}>
 						Ir al perfil
 					</Button>
+					<Button onClick={() => window.location.href="/vender"}>
+						Vender libro
+					</Button>
 					</p>
 			  	</header>
 			</div>

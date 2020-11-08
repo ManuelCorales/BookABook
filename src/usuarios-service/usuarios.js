@@ -18,6 +18,7 @@ class UsuariosService extends MicroservicioBase{
             type Mutation {
                 guardarUsuario(usuario: InputUsuario!): Usuario
                 habilitarSuscripcion(idUsuario: ID!): Usuario
+                sumarSaldo(idUsuario: ID!, monto: Float!): Usuario
             }
 
             input InputUsuario {
@@ -40,6 +41,7 @@ class UsuariosService extends MicroservicioBase{
                 DNI: Int
                 numeroDeTarjeta: Int
                 estasuscripto: Boolean
+                saldo: Float
                 libros: [Libro]
             }
 
@@ -81,21 +83,17 @@ class UsuariosService extends MicroservicioBase{
     bindUsuario(usuario){
         usuario.libros = async () => {
             let resultadoLibros = await this.consulta(`SELECT * FROM usuario_librossuscripcion WHERE id_usuario = ${usuario.id}`);
-            console.log(84, resultadoLibros);
             if(resultadoLibros.length != 0){
                 let queryDeUsuario =
                 {
-                    "query": `query librosPorIds($ids: [ID]) {librosPorIds(ids: $ids){id titulo autor slug descripcion stock}}`,
+                    "query": `query librosPorIds($ids: [ID]) {librosPorIds(ids: $ids){id titulo autor slug descripcion stock esUsado}}`,
                     "variables": {
                         "ids": resultadoLibros.map(libro => libro.id_libro)
                     }
                 }
-                console.log(93, resultadoLibros.map(libro => libro.id_libro));
                 let librosAleatorios = await this.consultarMicroservicio(queryDeUsuario, 3002);
-                console.log(94, librosAleatorios.data.librosPorIds);
                 return librosAleatorios.data.librosPorIds;
             } else {
-                console.log(97, "Entré");
                 return [];
             }
         }
@@ -116,7 +114,7 @@ class UsuariosService extends MicroservicioBase{
                 }
                 let resultado = await this.consulta(`SELECT * FROM usuarios WHERE usuario='${datosRegistro.usuario}' OR correo='${datosRegistro.correo}' `);
                 if(resultado.length === 0){
-                    let resultado = await this.consulta(`INSERT INTO usuarios (usuario, nombre, password, apellido, correo, dni, estasuscripto, numerotarjeta) VALUES('${datosRegistro.usuario}', '${datosRegistro.nombre}', '${datosRegistro.password}', '${datosRegistro.apellido}', '${datosRegistro.correo}', ${datosRegistro.dni}, 1, 7000) `);
+                    let resultado = await this.consulta(`INSERT INTO usuarios (usuario, nombre, password, apellido, correo, dni, estasuscripto, numerotarjeta, saldo) VALUES('${datosRegistro.usuario}', '${datosRegistro.nombre}', '${datosRegistro.password}', '${datosRegistro.apellido}', '${datosRegistro.correo}', ${datosRegistro.dni}, 1, 7000, 0) `);
                     let usuarioCreado  = await this.consulta(`SELECT * FROM usuarios WHERE id=${resultado.insertId}`);
                     return {
                         resultado: true,
@@ -201,6 +199,11 @@ class UsuariosService extends MicroservicioBase{
             await this.consulta(`INSERT INTO usuario_librossuscripcion (id_usuario, id_libro) VALUES ${stringsInsert.join()};`);
             let resultadoADevolver = await this.consulta(`SELECT * FROM usuarios WHERE id=${req.idUsuario}`);
             return this.bindUsuario(resultadoADevolver[0]); 
+        },
+        sumarSaldo: async (req) => {
+            await this.consulta(`UPDATE usuarios SET saldo=saldo + ${req.monto} WHERE id = ${req.idUsuario};`);
+            let resultadoUsuarioADevolver = this.consulta(`SELECT * FROM usuarios WHERE id = ${req.idUsuario};`);
+            return this.bindUsuario(resultadoUsuarioADevolver[0]);
         }
     };
 }

@@ -4,6 +4,7 @@ import ConsultaMicroservicioHelper from '../helpers/consultaMicroservicioHelper'
 import React from 'react';
 import PadrePaginas from '../components/padrePaginas'
 import PlantillaPaginaGenerica from '../components/plantillaPaginaGenerica';
+import SliderLibros from '../components/sliderLibros';
 
 class Landing extends PadrePaginas {
     constructor(){
@@ -35,6 +36,8 @@ class Landing extends PadrePaginas {
 						Estas en el landing
 						</p>
 					</header>
+					{console.log(39, this.state.libros)}
+					<SliderLibros libros={this.state.libros} />
 				</PlantillaPaginaGenerica>
 			</div>
 		);

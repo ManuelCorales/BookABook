@@ -3,13 +3,19 @@ import Cookies from 'universal-cookie';
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import ConsultaMicroservicioHelper from '../helpers/consultaMicroservicioHelper';
+import IconButton from '@material-ui/core/IconButton';
+import FormControl from '@material-ui/core/FormControl';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 class LoginPage extends React.Component {    
     constructor(props){
         super(props);
         const cookies = new Cookies();
         let id_usuario = cookies.get('id_usuario');
-        console.log(12, id_usuario);
         if(id_usuario){
             window.location.href = "/"
         }
@@ -19,7 +25,8 @@ class LoginPage extends React.Component {
                 usuario: "",
                 password: "",
             },
-            errores: []
+            mostrarPassword: false,
+            errores: [],
         };
         this.actualizarCampo = this.actualizarCampo.bind(this);
         this.handlerIniciarSesion = this.handlerIniciarSesion.bind(this);
@@ -59,7 +66,6 @@ class LoginPage extends React.Component {
             let errores = this.state.errores
             errores.push("El DNI tiene que ser un número");
 
-            console.log(62, errores);
             this.setState({ errores });
             return;
         }
@@ -95,7 +101,28 @@ class LoginPage extends React.Component {
                     {!this.state.enLoginORegistro ?
                         <div>
                             <TextField name="usuario" variant="outlined" label="Usuario" value={this.state.datosLogin.usuario} onChange={this.actualizarCampo} />
-                            <TextField name="password" variant="outlined" label="Usuario" value={this.state.datosLogin.password} onChange={this.actualizarCampo} />
+                            <FormControl variant="outlined">
+                                <InputLabel>Password</InputLabel>
+                                <OutlinedInput
+                                    type={this.state.mostrarPassword ? 'text' : 'password'}
+                                    name="password"
+                                    value={this.state.datosLogin.password}
+                                    onChange={this.actualizarCampo}
+                                    onKeyPress={(e) => {if(e.key==="Enter") this.handlerIniciarSesion();}}
+                                    endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={() => this.setState({mostrarPassword: !this.state.mostrarPassword})}
+                                        edge="end"
+                                        >
+                                        {this.state.mostrarPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                    }
+                                    labelWidth={70}
+                                />
+                            </FormControl>
                             <Button variant="contained" color="primary" onClick={this.handlerIniciarSesion}>
                                 Iniciar sesión
                             </Button>
@@ -108,7 +135,27 @@ class LoginPage extends React.Component {
                             <TextField name="usuario" variant="outlined" label="Usuario" value={this.state.datosLogin.usuario} onChange={this.actualizarCampo} />
                             <TextField name="nombre" variant="outlined" label="Nombre" value={this.state.datosLogin.nombre} onChange={this.actualizarCampo} />
                             <TextField name="apellido" variant="outlined" label="Apellido" value={this.state.datosLogin.apellido} onChange={this.actualizarCampo} />
-                            <TextField name="password" variant="outlined" label="Password" value={this.state.datosLogin.password} onChange={this.actualizarCampo} />
+                            <FormControl variant="outlined">
+                                <InputLabel>Password</InputLabel>
+                                <OutlinedInput
+                                    type={this.state.mostrarPassword ? 'text' : 'password'}
+                                    name="password"
+                                    value={this.state.datosLogin.password}
+                                    onChange={this.actualizarCampo}
+                                    endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={() => this.setState({mostrarPassword: !this.state.mostrarPassword})}
+                                        edge="end"
+                                        >
+                                        {this.state.mostrarPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                    }
+                                    labelWidth={70}
+                                />
+                            </FormControl>
                             <TextField name="dni" variant="outlined" label="DNI" value={this.state.datosLogin.dni} onChange={this.actualizarCampo} />
                             <TextField name="correo" variant="outlined" label="Correo" value={this.state.datosLogin.correo} onChange={this.actualizarCampo} />
                             <Button variant="contained" color="primary" onClick={this.handlerRegistarUsuario} >

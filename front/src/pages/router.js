@@ -4,7 +4,8 @@ import FichaProductoPage from './fichaProductoPage';
 import paginaNoEncontradaPage from './paginaNoEncontradaPage';
 import LoginPage from './loginPage';
 import PerfilPage from './perfilPage';
-import CompraPage from './compraPage'
+import CompraPage from './compraPage';
+import FormularioVentaPage from './formularioVentaPage';
 import React from 'react';
 
 class Router extends React.Component {
@@ -36,8 +37,17 @@ class Router extends React.Component {
                         path="/paginanoencontrada"
                         component={paginaNoEncontradaPage} />
                     <Route     
+                        path="/vender"
+                        component={FormularioVentaPage} />
+                    <Route     
                         path="/login"
                         component={LoginPage} />
+                    <Route
+                        path="/ventafinalizada"
+                        component={LandingPage} />
+                    <Route
+                        path="/comprafinalizada"
+                        component={LandingPage} />
                     <Redirect
                         to="/paginanoencontrada" />
                 </Switch>

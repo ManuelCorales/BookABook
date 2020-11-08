@@ -14,8 +14,8 @@ export default class LibroItem extends React.Component {
 
     render(){
         return(
-            <div>
-
+            <div onClick={() => window.location.href=`/libro/${this.props.libro.slug}`}>
+                {this.props.libro.titulo}
             </div>
         );
     }

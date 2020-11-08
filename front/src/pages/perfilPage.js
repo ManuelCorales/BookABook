@@ -16,6 +16,7 @@ class PerfilPage extends PadrePaginas {
                 apellido: "Cargando...",
                 correo: "Cargando...",
             },
+            libros: [],
             dialogSuscripcionAbierto: false,
             seSuscribio: false,
         }
@@ -32,7 +33,6 @@ class PerfilPage extends PadrePaginas {
                     "id": id_usuario
                 }
             }, 3001);
-        console.log(35, respuesta);
         this.setState({ usuario: respuesta.data.usuarioPorId });
 	}
 
@@ -45,8 +45,13 @@ class PerfilPage extends PadrePaginas {
                     "id": this.state.usuario.id,
                 }
             }, 3001);
-            console.log(47, respuesta);
         setTimeout(() => { this.setState({dialogSuscripcionAbierto: false, usuario: respuesta.data.habilitarSuscripcion}) }, 2000);
+    }
+
+    handlerCerrarSesion(){
+        const cookies = new Cookies();
+        cookies.remove("id_usuario");
+        window.location.href = "/login";
     }
 
 	render(){
@@ -84,6 +89,9 @@ class PerfilPage extends PadrePaginas {
                                     </>
                                 }
                             </Dialog>
+                            <Button variant="contained" color="primary" onClick={this.handlerCerrarSesion}>
+                                Cerrar sesión
+                            </Button>
                         </p>
 					</header>
 			</div>

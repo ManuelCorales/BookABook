@@ -17,6 +17,7 @@ class LibrosService extends MicroservicioBase{
             }
 
             type Mutation {
+                venderLibro(idUsuario: ID!, libroAVender: InputLibro!): ResultadoVenta
                 generarLibrosAleatorios: [Libro]
             }
 
@@ -30,6 +31,22 @@ class LibrosService extends MicroservicioBase{
                 precio: Float
             }
 
+            input InputLibro {
+                id: ID
+                titulo: String
+                autor: String
+                slug: String
+                descripcion: String
+                stock: Int
+                precio: Float
+                esUsado: Boolean
+            }
+
+            type ResultadoVenta {
+                resultado: Boolean
+                errores: [String]
+                libro: Libro
+            }
         `)
     }
 
@@ -65,6 +82,59 @@ class LibrosService extends MicroservicioBase{
             await this.consulta(`UPDATE libros SET stock = stock - 1  WHERE id IN (${librosRandomAElegir.map(libro => libro.id).join()})`);
             return librosRandomAElegir;
         },
+        venderLibro: async(req) => {
+            const libro = req.libroAVender
+            if("titulo" in libro && "autor" in libro && "descripcion" in libro){
+                for(const dato in libro){
+                    if(dato.length === 0){
+                        return {
+                            resultado: false,
+                            errores: ["Complete los todos los campos"],
+                        }
+                    }
+                }
+                let parametros = [];
+                let columnas = []
+                let resultadoVerificacionRepetido = await this.consulta(`SELECT * FROM libros WHERE titulo = '${libro.titulo}'`);
+                if(resultadoVerificacionRepetido.length > 0){
+                    return {
+                        resultado: false,
+                        errores: ["Libro ya registrado"],
+                    }
+                }
+                for(let propiedad in libro){
+                    columnas.push(propiedad);
+                    if(libro[propiedad] === true) {
+                        libro[propiedad] = 1;
+                    } else if (libro[propiedad] === false) {
+                        libro[propiedad] = 0;
+                    }
+                    parametros.push(`'${libro[propiedad]}'`);
+                }
+
+                let resultado = await this.consulta(`INSERT INTO libros (${columnas.join()}) VALUES(${parametros.join()}) `);
+                let libroCreado  = await this.consulta(`SELECT * FROM libros WHERE id=${resultado.insertId}`);
+                let querySumarSaldo =
+                {
+                    "query": `mutation sumarSaldo($idUsuario: ID!, $monto: Float!) {sumarSaldo(idUsuario: $idUsuario, monto: $monto) {id nombre}}`,
+                    "variables": {
+                        "idUsuario": req.idUsuario,
+                        "monto": 50,
+                    }
+                }
+                await this.consultarMicroservicio(querySumarSaldo, 3001);
+                return {
+                    resultado: true,
+                    libro: libroCreado[0],
+                    errores: [],
+                }
+            } else {
+                return {
+                    resultado: false,
+                    errores: ["Complete todos los campos"],
+                }
+            }
+        }
     };
 }
 
