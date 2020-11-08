@@ -3,6 +3,8 @@ import ConsultaMicroservicioHelper from '../helpers/consultaMicroservicioHelper'
 import React from 'react';
 import PadrePaginas from '../components/padrePaginas'
 import Cookies from 'universal-cookie';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class CompraPage extends PadrePaginas {
     constructor(){
@@ -18,7 +20,9 @@ class CompraPage extends PadrePaginas {
             libro: {
                 precio: "Cargando...",
             },
-		}
+            pagoEnProceso: false,
+        }
+        this.handlerFinalizarPago = this.handlerFinalizarPago.bind(this);
     }
     
 	async componentDidMount(){
@@ -46,7 +50,25 @@ class CompraPage extends PadrePaginas {
             usuario: respuestaUsuario.data.usuarioPorId,
 			libro: respuestaLibro.data.libroPorSlug,
 		});
-	}
+    }
+    
+    async handlerFinalizarPago(){
+        this.setState({pagoEnProceso: true});
+        let respuesta = await ConsultaMicroservicioHelper(
+            {
+                "query": `mutation comprarLibro($idUsuario: ID!, $idLibroAComprar: ID!) {comprarLibro (idLibroAComprar: $idLibroAComprar, idUsuario: $idUsuario) {resultado errores libro{id} }}`,
+                "variables": {
+                    "idUsuario": this.state.usuario.id,
+                    "idLibroAComprar": this.state.libro.id
+                }
+            }, 3002);
+            if(respuesta.data.comprarLibro.resultado){
+                this.setState({ errores: [] });
+                window.location.href = "/comprafinalizada";
+            } else {
+                this.setState({ pagoEnProceso: false, errores: respuesta.data.comprarLibro.errores });
+            }
+    }
 
 
 	render(){
@@ -66,6 +88,15 @@ class CompraPage extends PadrePaginas {
                             <br/>
                             El libro cuesta:
                             {this.state.libro.precio}
+                            <Button variant="contained" color="primary" onClick={this.handlerFinalizarPago} >
+                                {this.state.pagoEnProceso ? 
+                                <CircularProgress style={{color: "white"}} size={14} />
+                                :
+                                "Finalizar pago"
+                                }
+                            </Button>
+                            <br/>
+                            {this.state.errores}
 						</p>
 					</header>
 			</div>

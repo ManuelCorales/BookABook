@@ -30,13 +30,9 @@ class Landing extends PadrePaginas {
 				<PlantillaPaginaGenerica>
 					<header className="App-header">
 						<p>
-						<Button variant="contained" color="primary" onClick={() => ConsultaMicroservicioHelper(null, 3002)}>
-							un botón
-						</Button>
 						Estas en el landing
 						</p>
 					</header>
-					{console.log(39, this.state.libros)}
 					<SliderLibros libros={this.state.libros} />
 				</PlantillaPaginaGenerica>
 			</div>
@@ -44,4 +40,4 @@ class Landing extends PadrePaginas {
 	}
 }
   
-  export default Landing;
+export default Landing;

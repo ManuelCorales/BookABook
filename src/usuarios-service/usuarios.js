@@ -11,14 +11,14 @@ class UsuariosService extends MicroservicioBase{
         return(`
             type Query {
                 usuarioPorId(idUsuario: ID!): Usuario
-                validarLogin(datosLogin: InputDatosLogin): RespuestaValidacion
-                registrarUsuario(datosRegistro: InputUsuarioRegistro!): RespuestaValidacion
+                validarLogin(datosLogin: InputDatosLogin): RespuestaOperacion
+                registrarUsuario(datosRegistro: InputUsuarioRegistro!): RespuestaOperacion
             }
 
             type Mutation {
                 guardarUsuario(usuario: InputUsuario!): Usuario
                 habilitarSuscripcion(idUsuario: ID!): Usuario
-                sumarSaldo(idUsuario: ID!, monto: Float!): Usuario
+                alterarSaldo(idUsuario: ID!, monto: Float!): RespuestaAlterarSaldo
             }
 
             input InputUsuario {
@@ -71,12 +71,22 @@ class UsuariosService extends MicroservicioBase{
                 numerotarjeta: Int
             }
 
-            type RespuestaValidacion{
+            type RespuestaOperacion{
                 resultado: Boolean
                 usuario: Usuario
                 errores: [String]
             }
 
+            type RespuestaAlterarSaldo{
+                resultado: Boolean
+                usuario: Usuario
+                errores: [MensajeError]
+            }
+
+            type MensajeError {
+                mensaje: String
+                codigo: Int
+            }
         `)
     }
 
@@ -200,10 +210,23 @@ class UsuariosService extends MicroservicioBase{
             let resultadoADevolver = await this.consulta(`SELECT * FROM usuarios WHERE id=${req.idUsuario}`);
             return this.bindUsuario(resultadoADevolver[0]); 
         },
-        sumarSaldo: async (req) => {
+        alterarSaldo: async (req) => {
+            let usuarioAAlterar = await this.consulta(`SELECT * FROM usuarios WHERE id = ${req.idUsuario};`);
+            if(usuarioAAlterar[0].saldo + req.monto < 0){
+                return {
+                    resultado: false,
+                    errores: [{mensaje: "El usuario no cuenta con el suficiente saldo", codigo: 300}],
+                };
+            } else {
+                usuarioAAlterar[0].saldo + req.monto;
+            }
             await this.consulta(`UPDATE usuarios SET saldo=saldo + ${req.monto} WHERE id = ${req.idUsuario};`);
-            let resultadoUsuarioADevolver = this.consulta(`SELECT * FROM usuarios WHERE id = ${req.idUsuario};`);
-            return this.bindUsuario(resultadoUsuarioADevolver[0]);
+
+            return {
+                resultado: true,
+                errores: [],
+                usuario: this.bindUsuario(usuarioAAlterar[0]),
+            };
         }
     };
 }

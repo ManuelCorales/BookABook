@@ -6,6 +6,8 @@ import LoginPage from './loginPage';
 import PerfilPage from './perfilPage';
 import CompraPage from './compraPage';
 import FormularioVentaPage from './formularioVentaPage';
+import CompraFinalizadaPage from './compraFinalizadaPage';
+import VentaFinalizadaPage from './ventaFinalizadaPage';
 import React from 'react';
 
 class Router extends React.Component {
@@ -44,10 +46,10 @@ class Router extends React.Component {
                         component={LoginPage} />
                     <Route
                         path="/ventafinalizada"
-                        component={LandingPage} />
+                        component={VentaFinalizadaPage} />
                     <Route
                         path="/comprafinalizada"
-                        component={LandingPage} />
+                        component={CompraFinalizadaPage} />
                     <Redirect
                         to="/paginanoencontrada" />
                 </Switch>

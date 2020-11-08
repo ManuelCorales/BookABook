@@ -17,7 +17,8 @@ class LibrosService extends MicroservicioBase{
             }
 
             type Mutation {
-                venderLibro(idUsuario: ID!, libroAVender: InputLibro!): ResultadoVenta
+                comprarLibro(idUsuario: ID!, idLibroAComprar: ID!): ResultadoCompraVenta
+                venderLibro(idUsuario: ID!, libroAVender: InputLibro!): ResultadoCompraVenta
                 generarLibrosAleatorios: [Libro]
             }
 
@@ -42,7 +43,7 @@ class LibrosService extends MicroservicioBase{
                 esUsado: Boolean
             }
 
-            type ResultadoVenta {
+            type ResultadoCompraVenta {
                 resultado: Boolean
                 errores: [String]
                 libro: Libro
@@ -56,7 +57,6 @@ class LibrosService extends MicroservicioBase{
             return resultado;
         },
         librosPorIds: async (req) => {
-            console.log(req.ids);
             let resultado = await this.consulta(`SELECT * FROM libros WHERE id IN (${req.ids.join()})`);
             return resultado;
         },
@@ -116,7 +116,7 @@ class LibrosService extends MicroservicioBase{
                 let libroCreado  = await this.consulta(`SELECT * FROM libros WHERE id=${resultado.insertId}`);
                 let querySumarSaldo =
                 {
-                    "query": `mutation sumarSaldo($idUsuario: ID!, $monto: Float!) {sumarSaldo(idUsuario: $idUsuario, monto: $monto) {id nombre}}`,
+                    "query": `mutation sumarSaldo($idUsuario: ID!, $monto: Float!) {alterarSaldo(idUsuario: $idUsuario, monto: $monto) {id nombre}}`,
                     "variables": {
                         "idUsuario": req.idUsuario,
                         "monto": 50,
@@ -134,6 +134,41 @@ class LibrosService extends MicroservicioBase{
                     errores: ["Complete todos los campos"],
                 }
             }
+        },
+        comprarLibro: async (req) => {
+            let libroAComprar =  await this.consulta(`SELECT * FROM libros WHERE id IN (${req.idLibroAComprar})`);
+            if(libroAComprar[0].stock <= 0){
+                return {
+                    resultado: false,
+                    errores: ["No hay stock para el libro deseado"],
+                }
+            }
+            await this.consulta(`UPDATE libros SET stock = stock - 1  WHERE id IN (${req.idLibroAComprar})`);
+            let queryAlterarSaldo =
+                {
+                    "query": `mutation alterarSaldo($idUsuario: ID!, $monto: Float!) {alterarSaldo(idUsuario: $idUsuario, monto: $monto) {resultado errores{mensaje codigo} usuario{id nombre} }}`,
+                    "variables": {
+                        "idUsuario": req.idUsuario,
+                        "monto": -libroAComprar[0].precio,
+                    }
+                }
+            let resultadoRestarSaldo = await this.consultarMicroservicio(queryAlterarSaldo, 3001);
+            console.log(156, resultadoRestarSaldo);
+            if(!resultadoRestarSaldo.data.alterarSaldo.resultado){
+                if(resultadoRestarSaldo.data.alterarSaldo.errores[0].codigo === 300){
+                    return {
+                        resultado: false,
+                        errores: ["El usuario no cuenta con saldo suficiente"],
+                    }
+                }
+            }
+            libroAComprar[0].stock -= 1;
+            console.log(165, "Por volver");
+            return {
+                resultado: true,
+                errores: [],
+                libro: libroAComprar[0],
+            } 
         }
     };
 }

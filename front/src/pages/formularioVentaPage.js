@@ -38,15 +38,13 @@ class FormularioVentaPage extends PadrePaginas {
                     "idUsuario": idUsuario
                 }
             }, 3002);
-            console.log(respuesta);
-            if(respuesta.data.venderLibro.resultado){
-                const cookies = new Cookies();
-                this.setState({ errores: [] });
-                window.location.href = "/ventafinalizada";
-            } else {
-                this.setState({ errores: respuesta.data.venderLibro.errores });
-            }
+        if(respuesta.data.venderLibro.resultado){
+            this.setState({ errores: [] });
+            window.location.href = "/ventafinalizada";
+        } else {
+            this.setState({ errores: respuesta.data.venderLibro.errores });
         }
+    }
 
 	render(){
 		return (
