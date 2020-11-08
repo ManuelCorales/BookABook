@@ -153,7 +153,6 @@ class LibrosService extends MicroservicioBase{
                     }
                 }
             let resultadoRestarSaldo = await this.consultarMicroservicio(queryAlterarSaldo, 3001);
-            console.log(156, resultadoRestarSaldo);
             if(!resultadoRestarSaldo.data.alterarSaldo.resultado){
                 if(resultadoRestarSaldo.data.alterarSaldo.errores[0].codigo === 300){
                     return {
@@ -163,7 +162,6 @@ class LibrosService extends MicroservicioBase{
                 }
             }
             libroAComprar[0].stock -= 1;
-            console.log(165, "Por volver");
             return {
                 resultado: true,
                 errores: [],
