@@ -97,7 +97,6 @@ class LoginPage extends React.Component {
     render(){
         return (
             <div className="App">
-                <header className="App-header">
                     {!this.state.enLoginORegistro ?
                         <div>
                             <TextField name="usuario" variant="outlined" label="Usuario" value={this.state.datosLogin.usuario} onChange={this.actualizarCampo} />
@@ -164,8 +163,6 @@ class LoginPage extends React.Component {
                         </div>
                     }
                     {this.state.errores}
-                    Estas en la página de login
-                </header>
             </div>
         );
     }

@@ -49,9 +49,8 @@ class Header extends React.Component {
 
 	render(){
 		return (	
-			<div className="App">
-			  	<header>
-					<p>
+			<div className="Header">
+					<p className="HeaderPMain">
                     Soy un header
 					<AutoSuggest
 						suggestions={this.state.sugerencias}
@@ -68,7 +67,6 @@ class Header extends React.Component {
 						Vender libro
 					</Button>
 					</p>
-			  	</header>
 			</div>
 		);
 	}

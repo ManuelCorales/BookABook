@@ -1,13 +1,11 @@
-.App {
-  text-align: center;
-}
+@import "./css/header.css"; 
 
-.App-header {
-  background-color: #282c34;
+.App {
+  background-color: rgb(255, 240, 201);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgba(255, 255, 255, 0.22);
 }
