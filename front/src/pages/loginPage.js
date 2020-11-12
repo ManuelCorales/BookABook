@@ -96,31 +96,53 @@ class LoginPage extends React.Component {
 
     render(){
         return (
-            <div className="App">
+            <div className="login">
                     {!this.state.enLoginORegistro ?
-                        <div>
-                            <TextField name="usuario" variant="outlined" label="Usuario" value={this.state.datosLogin.usuario} onChange={this.actualizarCampo} />
+                        <div className = "contenedorTextbox text-center mx-auto mt-5"> 
+                            <TextField className = "usuarioTextbox mb-3" name="usuario" variant="outlined" label="Usuario" value={this.state.datosLogin.usuario} onChange={this.actualizarCampo} />
                             <FormControl variant="outlined">
-                                <InputLabel>Password</InputLabel>
-                                <OutlinedInput
-                                    type={this.state.mostrarPassword ? 'text' : 'password'}
-                                    name="password"
-                                    value={this.state.datosLogin.password}
-                                    onChange={this.actualizarCampo}
-                                    onKeyPress={(e) => {if(e.key==="Enter") this.handlerIniciarSesion();}}
-                                    endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={() => this.setState({mostrarPassword: !this.state.mostrarPassword})}
-                                        edge="end"
-                                        >
-                                        {this.state.mostrarPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                    }
-                                    labelWidth={70}
-                                />
+                            <InputLabel>Password</InputLabel>
+                            <OutlinedInput
+                                type={this.state.mostrarPassword ? 'text' : 'password'}
+                                name="password"
+                                value={this.state.datosLogin.password}
+                                onChange={this.actualizarCampo}
+                                onKeyPress={(e) => {if(e.key==="Enter") this.handlerIniciarSesion();}}
+                                endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={() => this.setState({mostrarPassword: !this.state.mostrarPassword})}
+                                    edge="end"
+                                    >
+                                    {this.state.mostrarPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment>
+                                }
+                                labelWidth={70}
+                            />
+
+                                        {/* <TextField
+                                            className = "passwordTextbox"
+                                            label="Password"
+                                            variant="outlined"
+                                            type={this.state.mostrarPassword ? 'text' : 'password'}
+                                            name="password"
+                                            value={this.state.datosLogin.password}
+                                            onChange={this.actualizarCampo}
+                                            onKeyPress={(e) => {if(e.key==="Enter") this.handlerIniciarSesion();}}
+                                            inputProps={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={() => this.setState({mostrarPassword: !this.state.mostrarPassword})}
+                                                edge="end"
+                                                >
+                                                {this.state.mostrarPassword ? <Visibility /> : <VisibilityOff />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                            }
+                                        /> */}
                             </FormControl>
                             <Button variant="contained" color="primary" onClick={this.handlerIniciarSesion}>
                                 Iniciar sesión

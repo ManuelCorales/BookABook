@@ -1,4 +1,5 @@
 @import "./css/header.css"; 
+@import "./css/loginPage.css";
 
 .App {
   background-color: rgb(255, 240, 201);
