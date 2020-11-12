@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap');
+
 .HeaderPMain {
     background-color: white;
+    text-align: center;
+}
+
+.TituloHeader {
+    color: black;
+    font-family: 'Caveat Brush', cursive;
+    font-size: 50px;
 }

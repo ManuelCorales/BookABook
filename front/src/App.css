@@ -1,4 +1,4 @@
-@import "./css/header.css"; 
+@import "./css/header.css";
 
 .App {
   background-color: rgb(255, 240, 201);
@@ -8,4 +8,14 @@
 
   font-size: calc(10px + 2vmin);
   color: rgba(255, 255, 255, 0.22);
+}
+
+.botonGenerico {
+  background-color:  rgb(182, 149, 66);
+}
+
+.TituloHeader {
+  color: black;
+  font-family: 'Caveat Brush', cursive;
+  font-size: 50px;
 }
