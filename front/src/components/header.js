@@ -51,21 +51,21 @@ class Header extends React.Component {
 		return (	
 			<div className="Header">
 					<p className="HeaderPMain">
-                    Soy un header
-					<AutoSuggest
-						suggestions={this.state.sugerencias}
-						onSuggestionsFetchRequested={this.filtrarLibros}
-						onSuggestionsClearRequested={this.libroNoEncontrado}
-						getSuggestionValue={(e, j) => {window.location.href = `/libro/${e.slug}`} }
-						renderSuggestion={(suggestion) => this.renderSuggestion(suggestion)}
-						inputProps={{placeholder: "Buscá tu libro...", value: this.state.textoAutosuggest, onChange: (e, valor) => this.setState({textoAutosuggest: valor.newValue})}}
-					/>
-					<Button onClick={() => window.location.href="/perfil"}>
-						Ir al perfil
-					</Button>
-					<Button onClick={() => window.location.href="/vender"}>
-						Vender libro
-					</Button>
+						<span className="TituloHeader">Book a book</span>
+						<AutoSuggest
+							suggestions={this.state.sugerencias}
+							onSuggestionsFetchRequested={this.filtrarLibros}
+							onSuggestionsClearRequested={this.libroNoEncontrado}
+							getSuggestionValue={(e, j) => {window.location.href = `/libro/${e.slug}`} }
+							renderSuggestion={(suggestion) => this.renderSuggestion(suggestion)}
+							inputProps={{placeholder: "Buscá tu libro...", value: this.state.textoAutosuggest, onChange: (e, valor) => this.setState({textoAutosuggest: valor.newValue})}}
+						/>
+						<Button variant="contained" onClick={() => window.location.href="/perfil"} style={{backgroundColor: "rgb(182, 149, 66)"}} >
+							Ir al perfil
+						</Button>
+						<Button variant="contained" onClick={() => window.location.href="/vender"} className="botonGenerico" >
+							Vender libro
+						</Button>
 					</p>
 			</div>
 		);

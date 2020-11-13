@@ -1,7 +1,6 @@
-.contenedorTextbox {
-    width: 8em
-}
-
-.passwordTextbox{
-    margin-top: 1em;
+.login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:  100vh;
 }
