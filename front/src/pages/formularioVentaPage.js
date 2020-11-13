@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Cookies from 'universal-cookie';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import { Paper } from '@material-ui/core';
+import "../css/formularioVentaPage.css"
 
 class FormularioVentaPage extends PadrePaginas {
     constructor(){
@@ -51,58 +52,58 @@ class FormularioVentaPage extends PadrePaginas {
     
 	render(){
 		return (
-            <div className="App">
-                <div>
-                    <div className="contenedorTextboxVenta text-center mx-auto w-50">
-                        <Paper className="pb-3 pr-5">
-                            <div className="paperContent mx-auto">
-                                <span className="tituloHeader"> Sell a Book </span>
-                                <ul>
-                                    <div>
-                                        <TextField 
-                                            className="mt-2 w-50"
-                                            name="titulo" 
+                <div className="App">
+                    <div>
+                        <div className="contenedorTextboxVenta text-center mx-auto w-50">
+                            <Paper className="pb-3 pr-5">
+                                <div className="paperContent mx-auto">
+                                    <span className="tituloHeader"> Sell a Book </span>
+                                    <ul>
+                                        <div>
+                                            <TextField 
+                                                className="mt-2 w-50"
+                                                name="titulo" 
+                                                variant="outlined" 
+                                                label="Título del libro" 
+                                                value={this.state.libroAVender.titulo} 
+                                                onChange={this.actualizarCampo} />
+                                        </div>
+                                        <div>
+                                            <TextField 
+                                            className="mt-2 w-50" 
+                                            name="autor" 
                                             variant="outlined" 
-                                            label="Título del libro" 
-                                            value={this.state.libroAVender.titulo} 
+                                            label="Autor" 
+                                            value={this.state.libroAVender.autor} 
                                             onChange={this.actualizarCampo} />
-                                    </div>
-                                    <div>
-                                        <TextField 
-                                        className="mt-2 w-50" 
-                                        name="autor" 
-                                        variant="outlined" 
-                                        label="Autor" 
-                                        value={this.state.libroAVender.autor} 
-                                        onChange={this.actualizarCampo} />
-                                    </div>
-                                    <div>
-                                        <TextField
-                                            className="mt-2 w-100"
-                                            multiline
-                                            rowsMax={10}
-                                            name="descripcion" 
-                                            variant="outlined" 
-                                            label="Descripción" 
-                                            value={this.state.libroAVender.descripcion} onChange={this.actualizarCampo} />
-                                    </div>
-                                    <div className="d-block mt-3">
-                                        <Button
-                                            variant="contained" 
-                                            color="primary" 
-                                            onClick={this.handlerIniciarSesion}>
-                                            Vender
-                                        </Button>
-                                    </div>
-                                    <div>
-                                        {this.state.errores}
-                                    </div>
-                                </ul>
-                            </div>
-                            </Paper> 
+                                        </div>
+                                        <div>
+                                            <TextField
+                                                className="mt-2 w-100"
+                                                multiline
+                                                rowsMax={10}
+                                                name="descripcion" 
+                                                variant="outlined" 
+                                                label="Descripción" 
+                                                value={this.state.libroAVender.descripcion} onChange={this.actualizarCampo} />
+                                        </div>
+                                        <div className="d-block mt-3">
+                                            <Button
+                                                variant="contained" 
+                                                color="primary" 
+                                                onClick={this.handlerIniciarSesion}>
+                                                Vender
+                                            </Button>
+                                        </div>
+                                        <div>
+                                            {this.state.errores}
+                                        </div>
+                                    </ul>
+                                </div>
+                                </Paper> 
+                        </div>
                     </div>
                 </div>
-            </div>
 		);
 	}
 }
