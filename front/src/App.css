@@ -1,14 +1,14 @@
 @import "./css/header.css"; 
 @import "./css/loginPage.css";
+@import "./css/formularioVentaPage.css";
 
 .App {
   background-color: rgb(255, 240, 201);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-
   font-size: calc(10px + 2vmin);
-  color: rgba(255, 255, 255, 0.22);
+  color: rgba(0, 0, 0, 1);
 }
 
 .botonGenerico {

@@ -25,7 +25,6 @@ class Landing extends PadrePaginas {
 
 	render(){
 		return (
-			
 			<div className="App">
 				<PlantillaPaginaGenerica>
 					<header className="App-header">

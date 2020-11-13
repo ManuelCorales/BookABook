@@ -101,13 +101,15 @@ class LoginPage extends React.Component {
                     {!this.state.enLoginORegistro ?
                         <div className = "contenedorTextboxLogin text-center mx-auto w-50">
                             <Paper className="paperLogin pb-3">
-                                <div className="paperContent">
+                                <div className="paperContentLogin">
                                     <span className="tituloHeader"> Book a Book </span>
                                     <div className="w-75 mx-auto"> 
                                         <TextField className = "usuarioTextbox mb-3 w-75" name="usuario" variant="outlined" label="Usuario" value={this.state.datosLogin.usuario} onChange={this.actualizarCampo} /> 
                                     </div>
                                     <div className="d-block w-75 mx-auto">
-                                        <FormControl className="mb-3 w-75" variant="outlined">
+                                        <FormControl 
+                                            className="mb-3 w-75" 
+                                            variant="outlined">
                                             <InputLabel>Password</InputLabel>
                                             <OutlinedInput
                                                 type={this.state.mostrarPassword ? 'text' : 'password'}
@@ -141,56 +143,89 @@ class LoginPage extends React.Component {
                         </div>
                         :
                         <div className="contenedorTextboxRegistro text-center mx-auto w-50" >
-                            <div>
+                            <Paper className="pb-3 pt-3">
+                                <span className="tituloHeader"> Book a Book </span>
+                                <div className="w-75 mx-auto">
+                                    <TextField 
+                                        className = "usuarioTextbox mb-3 w-75"
+                                        name="usuario" 
+                                        variant="outlined" 
+                                        label="Usuario" 
+                                        value={this.state.datosLogin.usuario} 
+                                        onChange={this.actualizarCampo} />
+                                </div>
+
+                                <div className="w-75 mx-auto">
                                 <TextField 
-                                    name="usuario" 
+                                    className = "mb-3 w-75"
+                                    name="nombre" 
                                     variant="outlined" 
-                                    label="Usuario" 
-                                    value={this.state.datosLogin.usuario} 
+                                    label="Nombre" 
+                                    value={this.state.datosLogin.nombre} 
                                     onChange={this.actualizarCampo} />
-                            </div>
-                            <div>
-                            <TextField 
-                                name="nombre" 
-                                variant="outlined" 
-                                label="Nombre" 
-                                value={this.state.datosLogin.nombre} 
-                                onChange={this.actualizarCampo} />
-                            </div>
-                            <div>
-                            <TextField 
-                                name="apellido" 
-                                variant="outlined" 
-                                label="Apellido"
-                                value={this.state.datosLogin.apellido} 
-                                onChange={this.actualizarCampo} />
-                            </div>
-                            <FormControl variant="outlined">
-                                <InputLabel>Password</InputLabel>
-                                <OutlinedInput
-                                    type={this.state.mostrarPassword ? 'text' : 'password'}
-                                    name="password"
-                                    value={this.state.datosLogin.password}
-                                    onChange={this.actualizarCampo}
-                                    endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={() => this.setState({mostrarPassword: !this.state.mostrarPassword})}
-                                        edge="end"
-                                        >
-                                        {this.state.mostrarPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                    }
-                                    labelWidth={70}
-                                />
-                            </FormControl>
-                            <TextField name="dni" variant="outlined" label="DNI" value={this.state.datosLogin.dni} onChange={this.actualizarCampo} />
-                            <TextField name="correo" variant="outlined" label="Correo" value={this.state.datosLogin.correo} onChange={this.actualizarCampo} />
-                            <Button variant="contained" color="primary" onClick={this.handlerRegistarUsuario} >
-                                Registrarse
-                            </Button>
+                                </div>
+
+                                <div className="w-75 mx-auto">
+                                <TextField 
+                                    className = "mb-3 w-75"
+                                    name="apellido" 
+                                    variant="outlined" 
+                                    label="Apellido"
+                                    value={this.state.datosLogin.apellido} 
+                                    onChange={this.actualizarCampo} />
+                                </div>
+
+                                <div className="d-block w-75 mx-auto">
+                                    <FormControl 
+                                        className = "mb-3 w-75"
+                                        variant="outlined">
+                                        <InputLabel>Password</InputLabel>
+                                        <OutlinedInput
+                                            type={this.state.mostrarPassword ? 'text' : 'password'}
+                                            name="password"
+                                            value={this.state.datosLogin.password}
+                                            onChange={this.actualizarCampo}
+                                            endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={() => this.setState({mostrarPassword: !this.state.mostrarPassword})}
+                                                edge="end"
+                                                >
+                                                {this.state.mostrarPassword ? <Visibility /> : <VisibilityOff />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                            }
+                                            labelWidth={70}
+                                        />
+                                    </FormControl>
+                                </div>
+                                <div className="w-75 mx-auto"> 
+                                    <TextField 
+                                        className = "mb-3 w-75"
+                                        name="dni" 
+                                        variant="outlined" 
+                                        label="DNI" 
+                                        value={this.state.datosLogin.dni} 
+                                        onChange={this.actualizarCampo} /> 
+                                </div>
+                                <div className="w-75 mx-auto"> 
+                                    <TextField className = "mb-3 w-75"
+                                        name="correo" 
+                                        variant="outlined" 
+                                        label="Correo" 
+                                        value={this.state.datosLogin.correo} 
+                                        onChange={this.actualizarCampo} /> 
+                                </div>
+                                <div className="w-75 mx-auto"> 
+                                    <Button 
+                                        variant="contained" 
+                                        color="primary" 
+                                        onClick={this.handlerRegistarUsuario}>
+                                        Registrarse
+                                    </Button>
+                                </div>
+                            </Paper>
                         </div>
                     }
                     {this.state.errores}
