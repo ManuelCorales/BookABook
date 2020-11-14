@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Cookies from 'universal-cookie';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import { Paper } from '@material-ui/core';
-import "../css/formularioVentaPage.css"
+
 
 class FormularioVentaPage extends PadrePaginas {
     constructor(){
