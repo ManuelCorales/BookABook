@@ -6,6 +6,7 @@ import PadrePaginas from '../components/padrePaginas'
 import PlantillaPaginaGenerica from '../components/plantillaPaginaGenerica';
 import SliderLibros from '../components/sliderLibros';
 import { Paper } from '@material-ui/core';
+import { Slider } from '@material-ui/core';
 
 class Landing extends PadrePaginas {
     constructor(){
@@ -29,7 +30,9 @@ class Landing extends PadrePaginas {
 			<div className="App">
 				<PlantillaPaginaGenerica>
 					<Paper>
-					<SliderLibros libros={this.state.libros} />
+					<SliderLibros 
+						libros={this.state.libros}
+						style="" />
 					</Paper>
 				</PlantillaPaginaGenerica>
 				<div>

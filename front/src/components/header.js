@@ -60,10 +60,18 @@ class Header extends React.Component {
 							renderSuggestion={(suggestion) => this.renderSuggestion(suggestion)}
 							inputProps={{placeholder: "Buscá tu libro...", value: this.state.textoAutosuggest, onChange: (e, valor) => this.setState({textoAutosuggest: valor.newValue})}}
 						/>
-						<Button variant="contained" onClick={() => window.location.href="/perfil"} style={{backgroundColor: "rgb(182, 149, 66)"}} >
+						<Button 
+							className="mr-3"
+							variant="contained" 
+							onClick={() => window.location.href="/perfil"} 
+							style={{backgroundColor: "rgb(182, 149, 166)"}} >
 							Ir al perfil
 						</Button>
-						<Button variant="contained" onClick={() => window.location.href="/vender"} className="botonGenerico" >
+						<Button 
+							variant="contained" 
+							onClick={() => window.location.href="/vender"} 
+							className="botonGenerico"
+							style={{backgroundColor: "rgb(100, 80, 178)"}} >
 							Vender libro
 						</Button>
 					</p>
