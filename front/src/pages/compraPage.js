@@ -62,6 +62,7 @@ class CompraPage extends PadrePaginas {
                     "idLibroAComprar": this.state.libro.id
                 }
             }, 3002);
+            console.log(65, respuesta);
             if(respuesta.data.comprarLibro.resultado){
                 this.setState({ errores: [] });
                 window.location.href = "/comprafinalizada";

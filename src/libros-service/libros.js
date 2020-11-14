@@ -116,7 +116,7 @@ class LibrosService extends MicroservicioBase{
                 let libroCreado  = await this.consulta(`SELECT * FROM libros WHERE id=${resultado.insertId}`);
                 let querySumarSaldo =
                 {
-                    "query": `mutation sumarSaldo($idUsuario: ID!, $monto: Float!) {alterarSaldo(idUsuario: $idUsuario, monto: $monto) {id nombre}}`,
+                    "query": `mutation sumarSaldo($idUsuario: ID!, $monto: Float!) {alterarSaldo(idUsuario: $idUsuario, monto: $monto) {resultado}}`,
                     "variables": {
                         "idUsuario": req.idUsuario,
                         "monto": 50,

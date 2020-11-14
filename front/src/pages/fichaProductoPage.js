@@ -41,13 +41,13 @@ class FichaProductoPage extends PadrePaginas {
                 <PlantillaPaginaGenerica>
                     <header className="App-header">
                         <p>
-                            <Button variant="contained" color="primary" onClick={() => window.location.href="/comprar/" + this.state.libro.slug} >
-                                Comprar
-                            </Button>
                             Estas en la ficha del producto {this.state.libro.titulo}
                             <br>
                             </br>
                             La descripción es: {this.state.libro.descripcion}
+                            <Button variant="contained" color="primary" onClick={() => window.location.href="/comprar/" + this.state.libro.slug} >
+                                Comprar
+                            </Button>
                         </p>
                     </header>
                 </PlantillaPaginaGenerica>

@@ -5,17 +5,12 @@ export default function SliderLibros(props) {
     const [pagina, setPagina] = useState(0);
     return(
         <div>
-            {/* {props.libros[0]?.titulo} */}
             {
                 props.libros.map((libro, index) =>{
                     if(index < pagina + 3 && index >= pagina)
                     return(
                         <div>
                             <LibroItem libro={libro}/>
-                            {/* <h1>
-                                {libro.titulo}
-                            </h1>
-                            {console.log(15, libro)} */}
                         </div>
                     );
                 })
