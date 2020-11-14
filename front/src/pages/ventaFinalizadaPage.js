@@ -4,6 +4,7 @@ import React from 'react';
 import PadrePaginas from '../components/padrePaginas'
 import Cookies from 'universal-cookie';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 
 class VentaFinalizadaPage extends PadrePaginas {
     constructor(){
@@ -30,18 +31,27 @@ class VentaFinalizadaPage extends PadrePaginas {
 
 	render(){
 		return (
-			
-			<div className="App">
-					<header className="App-header">
-						<p>
-						    Gracias {this.state.usuario.nombre} por vender su libro en Book a Book!
-                            <br/>
-                            <Button variant="contained" color="primary" onClick={() => window.location.href = "/home"} >
-                                Volver al home
-                            </Button>
-						</p>
-					</header>
-			</div>
+            <div className="mainDiv">
+                <body>
+                    <div className = "contenedorPaperVentaFinalizada text-center mx-auto w-100">
+                        <Paper className="paperLogin pb-3">
+                            <div className="paperContentLogin">
+                                <p>
+                                    <span className="spanAgradecimiento">Gracias {this.state.usuario.nombre} por vender su libro en Book a Book!</span>
+                                    <br/>
+                                    <span className="spanAgradecimiento">Se le acreditaron $50 a su cuenta</span>
+                                    <br/>
+                                    <div className="contenedorBoton">
+                                        <Button variant="contained" color="primary" onClick={() => window.location.href = "/home"} >
+                                            Volver al home
+                                        </Button>
+                                    </div>
+                                </p>
+                            </div>
+                        </Paper>
+                    </div>
+                </body>
+        </div>
 		);
 	}
 }
