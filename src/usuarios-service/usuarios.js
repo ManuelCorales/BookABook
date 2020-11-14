@@ -124,7 +124,7 @@ class UsuariosService extends MicroservicioBase{
                 }
                 let resultado = await this.consulta(`SELECT * FROM usuarios WHERE usuario='${datosRegistro.usuario}' OR correo='${datosRegistro.correo}' `);
                 if(resultado.length === 0){
-                    let resultado = await this.consulta(`INSERT INTO usuarios (usuario, nombre, password, apellido, correo, dni, estasuscripto, numerotarjeta, saldo) VALUES('${datosRegistro.usuario}', '${datosRegistro.nombre}', '${datosRegistro.password}', '${datosRegistro.apellido}', '${datosRegistro.correo}', ${datosRegistro.dni}, 1, 7000, 0) `);
+                    let resultado = await this.consulta(`INSERT INTO usuarios (usuario, nombre, password, apellido, correo, dni, estasuscripto, numerotarjeta, saldo) VALUES('${datosRegistro.usuario}', '${datosRegistro.nombre}', '${datosRegistro.password}', '${datosRegistro.apellido}', '${datosRegistro.correo}', ${datosRegistro.dni}, 0, 7000, 0) `);
                     let usuarioCreado  = await this.consulta(`SELECT * FROM usuarios WHERE id=${resultado.insertId}`);
                     return {
                         resultado: true,
@@ -220,6 +220,7 @@ class UsuariosService extends MicroservicioBase{
             } else {
                 usuarioAAlterar[0].saldo + req.monto;
             }
+            console.log(223, req.monto, req.idUsuario);
             await this.consulta(`UPDATE usuarios SET saldo=saldo + ${req.monto} WHERE id = ${req.idUsuario};`);
 
             return {

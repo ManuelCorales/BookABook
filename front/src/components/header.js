@@ -25,9 +25,9 @@ class Header extends React.Component {
 
 	renderSuggestion(suggestion){
 		return(
-			<div> 
+			<span> 
 				{suggestion.titulo}
-			</div>
+			</span>
 		);
 	}
 
