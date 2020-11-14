@@ -7,10 +7,11 @@ export default function SliderLibros(props) {
         <div>
             {
                 props.libros.map((libro, index) =>{
-                    if(index < pagina + 3 && index >= pagina)
+                    if(index < pagina + 10 && index >= pagina)
                     return(
                         <div>
-                            <LibroItem libro={libro}/>
+                            <LibroItem 
+                                libro={libro}/>
                         </div>
                     );
                 })

@@ -29,11 +29,13 @@ class Landing extends PadrePaginas {
 		return (
 			<div className="App">
 				<PlantillaPaginaGenerica>
-					<Paper>
+				<div className="landingContenedor text-center mx-auto w-50">
+					<Paper className="pb-3 ">
 					<SliderLibros 
 						libros={this.state.libros}
-						style="" />
+						 />
 					</Paper>
+				</div>
 				</PlantillaPaginaGenerica>
 				<div>
 					

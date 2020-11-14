@@ -3,6 +3,7 @@ import ConsultaMicroservicioHelper from '../helpers/consultaMicroservicioHelper'
 import React from 'react';
 import PadrePaginas from '../components/padrePaginas'
 import PlantillaPaginaGenerica from '../components/plantillaPaginaGenerica';
+import {Paper} from '@material-ui/core';
 
 class FichaProductoPage extends PadrePaginas {
     constructor(props){
@@ -40,15 +41,24 @@ class FichaProductoPage extends PadrePaginas {
             <div className="App">
                 <PlantillaPaginaGenerica>
                     <header className="App-header">
-                        <p>
-                            Estas en la ficha del producto {this.state.libro.titulo}
-                            <br>
-                            </br>
-                            La descripción es: {this.state.libro.descripcion}
-                            <Button variant="contained" color="primary" onClick={() => window.location.href="/comprar/" + this.state.libro.slug} >
-                                Comprar
-                            </Button>
-                        </p>
+                    <div className="contenedorTextboxVenta text-center mx-auto w-50">
+                        <Paper className="pb-2">
+                            <p>
+                                <div className="text-center"> Estas en la ficha del producto: {this.state.libro.titulo}</div>
+                                <br>
+                                </br>
+                                <div>Descripción: {this.state.libro.descripcion}</div>
+                                <div className="text-center mt-3"> 
+                                    <Button 
+                                        variant="contained" 
+                                        color="primary" 
+                                        onClick={() => window.location.href="/comprar/" + this.state.libro.slug} >
+                                        Comprar
+                                    </Button>
+                                </div>
+                            </p>
+                        </Paper>
+                    </div>
                     </header>
                 </PlantillaPaginaGenerica>
             </div>

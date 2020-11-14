@@ -60,23 +60,26 @@ class PerfilPage extends PadrePaginas {
 			
 			<div className="App">
 					<header className="App-header">
-                    <Paper>
+                    <div className="contenedorTextboxVenta mx-auto w-50">    
+                    <Paper className="pb-3 pt-1">
 						<p>
-						    Estas en el perfil y tus datos son:
-                            <br/>
-                            {this.state.usuario.nombre}
-                            <br/>
-                            {this.state.usuario.apellido}
-                            {
-                                this.state.usuario.estasuscripto === true ?
-                                <div>
-                                    Usted ya está suscripto
-                                </div>
-                                :
-                                <Button variant="contained" color="primary" onClick={() => this.setState({dialogSuscripcionAbierto: true})}>
-                                    Suscribirse
-                                </Button>
-                            }
+                            <h3 className="text-center"><p><ins>Datos del usuario</ins></p></h3>
+                            <div className="text-center">Nombre: {this.state.usuario.nombre}</div>
+                            <div className="mb=2 mt=2 text-center"> Apellido: {this.state.usuario.apellido}</div>
+                            <div className="text-center"> Correo: {this.state.usuario.correo} </div>
+                            <div className="text-center"> Usuario: {this.state.usuario.usuario} </div>                                
+                            <div className="text-center"> 
+                                {
+                                    this.state.usuario.estasuscripto === true ?
+                                    <div className="mb-2">
+                                        El usuario ya está suscripto
+                                    </div>
+                                    :
+                                    <Button variant="contained" color="primary" onClick={() => this.setState({dialogSuscripcionAbierto: true})}>
+                                        Suscribirse
+                                    </Button>
+                                }
+                            </div>
                             <Dialog open={this.state.dialogSuscripcionAbierto} onClose={() => this.setState({dialogSuscripcionAbierto: false})}>
                                 { this.state.seSuscribio ?
                                     <>
@@ -91,11 +94,16 @@ class PerfilPage extends PadrePaginas {
                                     </>
                                 }
                             </Dialog>
-                            <Button variant="contained" color="primary" onClick={this.handlerCerrarSesion}>
+                            <Button
+                                className="ml-2" 
+                                variant="contained" 
+                                color="primary" 
+                                onClick={this.handlerCerrarSesion}>
                                 Cerrar sesión
                             </Button>
                         </p>
                     </Paper>
+                    </div>            
 					</header>
 			</div>
 		);
