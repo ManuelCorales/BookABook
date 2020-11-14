@@ -51,15 +51,19 @@ class Header extends React.Component {
 		return (	
 			<div className="Header">
 					<p className="HeaderPMain">
-						<span className="TituloHeader">Book a book</span>
-						<AutoSuggest
-							suggestions={this.state.sugerencias}
-							onSuggestionsFetchRequested={this.filtrarLibros}
-							onSuggestionsClearRequested={this.libroNoEncontrado}
-							getSuggestionValue={(e, j) => {window.location.href = `/libro/${e.slug}`} }
-							renderSuggestion={(suggestion) => this.renderSuggestion(suggestion)}
-							inputProps={{placeholder: "Buscá tu libro...", value: this.state.textoAutosuggest, onChange: (e, valor) => this.setState({textoAutosuggest: valor.newValue})}}
-						/>
+						<span className="tituloHeader">Book a book</span>
+						<div name="xd">
+							<AutoSuggest
+								className="autosuggestHeader"
+								suggestions={this.state.sugerencias}
+								onSuggestionsFetchRequested={this.filtrarLibros}
+								onSuggestionsClearRequested={this.libroNoEncontrado}
+								getSuggestionValue={(e, j) => {window.location.href = `/libro/${e.slug}`} }
+								renderSuggestion={(suggestion) => this.renderSuggestion(suggestion)}
+								inputProps={{placeholder: "Buscá tu libro...", value: this.state.textoAutosuggest, onChange: (e, valor) => this.setState({textoAutosuggest: valor.newValue})}}
+							/>
+						</div>
+
 						<Button variant="contained" onClick={() => window.location.href="/perfil"} style={{backgroundColor: "rgb(182, 149, 66)"}} >
 							Ir al perfil
 						</Button>

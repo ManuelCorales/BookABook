@@ -5,8 +5,8 @@
     text-align: center;
 }
 
-.TituloHeader {
-    color: black;
-    font-family: 'Caveat Brush', cursive;
-    font-size: 50px;
+.autosuggestHeader {
+    border-color: black;
+    border-radius: 10px;
+    border: solid black;
 }
