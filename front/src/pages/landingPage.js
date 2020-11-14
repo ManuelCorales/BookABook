@@ -5,6 +5,7 @@ import React from 'react';
 import PadrePaginas from '../components/padrePaginas'
 import PlantillaPaginaGenerica from '../components/plantillaPaginaGenerica';
 import SliderLibros from '../components/sliderLibros';
+import { Paper } from '@material-ui/core';
 
 class Landing extends PadrePaginas {
     constructor(){
@@ -27,13 +28,13 @@ class Landing extends PadrePaginas {
 		return (
 			<div className="App">
 				<PlantillaPaginaGenerica>
-					<header className="App-header">
-						<p>
-						Estas en el landing
-						</p>
-					</header>
+					<Paper>
 					<SliderLibros libros={this.state.libros} />
+					</Paper>
 				</PlantillaPaginaGenerica>
+				<div>
+					
+				</div>
 			</div>
 		);
 	}

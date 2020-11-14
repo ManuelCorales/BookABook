@@ -72,7 +72,7 @@ class LoginPage extends React.Component {
         }
         let resultado = await ConsultaMicroservicioHelper(
             {
-                "query": `query registrarUsuario($datosRegistro: InputUsuarioRegistro) {registrarUsuario (datosRegistro: $datosRegistro) {usuario{ usuario nombre id } resultado errores}}`,
+                "query": `query registrarUsuario($datosRegistro: InputUsuarioRegistro!) {registrarUsuario (datosRegistro: $datosRegistro) {usuario{ usuario nombre id } resultado errores}}`,
                 "variables": {
                     "datosRegistro": {
                         "usuario": this.state.datosLogin.usuario,

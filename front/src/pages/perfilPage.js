@@ -5,6 +5,7 @@ import React from 'react';
 import PadrePaginas from '../components/padrePaginas'
 import Cookies from 'universal-cookie';
 import Dialog from '@material-ui/core/Dialog';
+import { Paper } from '@material-ui/core';
 
 class PerfilPage extends PadrePaginas {
     constructor(){
@@ -59,6 +60,7 @@ class PerfilPage extends PadrePaginas {
 			
 			<div className="App">
 					<header className="App-header">
+                    <Paper>
 						<p>
 						    Estas en el perfil y tus datos son:
                             <br/>
@@ -93,6 +95,7 @@ class PerfilPage extends PadrePaginas {
                                 Cerrar sesión
                             </Button>
                         </p>
+                    </Paper>
 					</header>
 			</div>
 		);
