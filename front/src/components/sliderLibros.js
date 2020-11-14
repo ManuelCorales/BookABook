@@ -7,7 +7,7 @@ export default function SliderLibros(props) {
         <div>
             {
                 props.libros.map((libro, index) =>{
-                    if(index < pagina + 10 && index >= pagina)
+                    if(index < pagina + 3 && index >= pagina)
                     return(
                         <div>
                             <LibroItem 
@@ -16,11 +16,13 @@ export default function SliderLibros(props) {
                     );
                 })
             }
-            <div onClick={() => setPagina(pagina != 0 ? pagina - 1: pagina)} >
-                {"<-"}
-            </div>
-            <div onClick={() => setPagina(pagina < (props.libros.length - 1) /3 ? pagina + 1: pagina)}>
-                {"->"}
+            <div style={{"width": "100%", "overflow": "hidden"}}>
+                <div style={{"float": "left", "width": "150px", "cursor": "pointer"}} onClick={() => setPagina(pagina != 0 ? pagina - 1: pagina)} >
+                    {"<-"}
+                </div>
+                <div style={{"marginLeft": "620px", "cursor": "pointer"}} onClick={() => setPagina(pagina < (props.libros.length - 1) /3 ? pagina + 1: pagina)}>
+                    {"->"}
+                </div>
             </div>
         </div>
     );

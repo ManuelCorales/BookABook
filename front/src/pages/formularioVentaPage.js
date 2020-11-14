@@ -41,7 +41,6 @@ class FormularioVentaPage extends PadrePaginas {
                     "idUsuario": idUsuario
                 }
             }, 3002);
-        console.log(65, respuesta.data.venderLibro);
         if(respuesta.data.venderLibro.resultado){
             this.setState({ errores: [] });
             window.location.href = "/ventafinalizada";

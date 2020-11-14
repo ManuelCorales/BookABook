@@ -18,7 +18,7 @@ class FichaProductoPage extends PadrePaginas {
     
     async componentDidMount(){
         let query = {
-            "query": `query getLibro($slug: String!) {libroPorSlug (slug: $slug) {id titulo slug descripcion}}`,
+            "query": `query getLibro($slug: String!) {libroPorSlug (slug: $slug) {id titulo autor slug descripcion}}`,
             "variables": {
                 "slug": this.props.match.params.slug
             }
@@ -44,10 +44,10 @@ class FichaProductoPage extends PadrePaginas {
                     <div className="contenedorTextboxVenta text-center mx-auto w-50">
                         <Paper className="pb-2">
                             <p>
-                                <div className="text-center"> Estas en la ficha del producto: {this.state.libro.titulo}</div>
-                                <br>
-                                </br>
-                                <div>Descripción: {this.state.libro.descripcion}</div>
+                                <div className="text-center"> Titulo del libro: {this.state.libro.titulo}</div>
+                                <div className="text-center"> Autor: {this.state.libro.autor}</div>
+                                <br/>
+                                <div>{this.state.libro.descripcion}</div>
                                 <div className="text-center mt-3"> 
                                     <Button 
                                         variant="contained" 

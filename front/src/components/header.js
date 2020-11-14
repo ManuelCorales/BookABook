@@ -51,7 +51,7 @@ class Header extends React.Component {
 		return (	
 			<div className="Header">
 					<p className="HeaderPMain">
-						<span className="tituloHeader">Book a book</span>
+						<span className="tituloHeader" style={{"cursor": "pointer"}} onClick={() => window.location.href="/home"} >Book a book</span>
 						<div name="xd">
 							<AutoSuggest
 								className="autosuggestHeader"

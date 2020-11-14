@@ -115,10 +115,25 @@ class UsuariosService extends MicroservicioBase{
             const datosRegistro = req.datosRegistro
             if("usuario" in datosRegistro && "password" in datosRegistro && "nombre" in datosRegistro && "apellido" in datosRegistro && "correo" in datosRegistro && "dni" in datosRegistro){
                 for(const dato in datosRegistro){
-                    if(dato.length === 0){
+                    if(!datosRegistro[dato] || datosRegistro[dato].length === 0){
                         return {
                             resultado: false,
                             errores: ["Complete los todos los campos"],
+                        }
+                    }
+                }
+                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                if(!re.test(datosRegistro.correo)) {
+                    return {
+                        resultado: false,
+                        errores: ["Complete el campo correo correctamente"],
+                    }
+                }
+                if(datosRegistro.dni) {
+                    if(isNaN(datosRegistro.dni) || datosRegistro.dni.toString().length < 7 || datosRegistro.toString().dni > 8){
+                        return {
+                            resultado: false,
+                            errores: ["Ingrese un DNI adecuado"],
                         }
                     }
                 }
@@ -220,7 +235,6 @@ class UsuariosService extends MicroservicioBase{
             } else {
                 usuarioAAlterar[0].saldo + req.monto;
             }
-            console.log(223, req.monto, req.idUsuario);
             await this.consulta(`UPDATE usuarios SET saldo=saldo + ${req.monto} WHERE id = ${req.idUsuario};`);
 
             return {

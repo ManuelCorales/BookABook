@@ -5,6 +5,7 @@ import PadrePaginas from '../components/padrePaginas'
 import Cookies from 'universal-cookie';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Paper from '@material-ui/core/Paper';
 
 class CompraPage extends PadrePaginas {
     constructor(){
@@ -76,30 +77,33 @@ class CompraPage extends PadrePaginas {
 		return (
 			
 			<div className="App">
-					<header className="App-header">
-						<p>
-						    Tus datos son:
-                            <br/>
-                            {this.state.usuario.nombre}
-                            <br/>
-                            {this.state.usuario.apellido}
-                            <br/>
-                            Tu saldo es:
-                            {this.state.usuario.saldo}
-                            <br/>
-                            El libro cuesta:
-                            {this.state.libro.precio}
-                            <Button variant="contained" color="primary" onClick={this.handlerFinalizarPago} >
-                                {this.state.pagoEnProceso ? 
-                                <CircularProgress style={{color: "white"}} size={14} />
-                                :
-                                "Finalizar pago"
-                                }
-                            </Button>
-                            <br/>
-                            {this.state.errores}
-						</p>
-					</header>
+                <div className="contenedorTextboxVenta text-center mx-auto w-50">
+                    <Paper className="pb-3 pr-5">
+                        <div className="paperContent mx-auto">
+                            <p>
+                                Tus datos son:
+                                <br/>
+                                {this.state.usuario.nombre}
+                                <br/>
+                                {this.state.usuario.apellido}
+                                <br/>
+                                Tu saldo es: ${this.state.usuario.saldo}
+                                <br/>
+                                El libro cuesta: ${this.state.libro.precio}
+                                <br/>
+                                <Button variant="contained" color="primary" onClick={this.handlerFinalizarPago} >
+                                    {this.state.pagoEnProceso ? 
+                                    <CircularProgress style={{color: "white"}} size={14} />
+                                    :
+                                    "Finalizar pago"
+                                    }
+                                </Button>
+                                <br/>
+                                {this.state.errores}
+                            </p>
+                        </div>
+                    </Paper>
+                </div>
 			</div>
 		);
 	}

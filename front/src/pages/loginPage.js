@@ -52,6 +52,7 @@ class LoginPage extends React.Component {
                 }
             }, 3001
         )
+        console.log(55, resultado.data);
         if(resultado.data.validarLogin.resultado){
             const cookies = new Cookies();
             cookies.set("id_usuario", resultado.data.validarLogin.usuario.id);
@@ -63,13 +64,6 @@ class LoginPage extends React.Component {
     }
 
     async handlerRegistarUsuario(){
-        if(isNaN(this.state.datosLogin.dni)){
-            let errores = this.state.errores
-            errores.push("El DNI tiene que ser un número");
-
-            this.setState({ errores });
-            return;
-        }
         let resultado = await ConsultaMicroservicioHelper(
             {
                 "query": `query registrarUsuario($datosRegistro: InputUsuarioRegistro!) {registrarUsuario (datosRegistro: $datosRegistro) {usuario{ usuario nombre id } resultado errores}}`,
@@ -85,6 +79,7 @@ class LoginPage extends React.Component {
                 }
             }, 3001
         )
+        console.log(89, resultado.data);
         if(resultado.data.registrarUsuario.resultado){
             const cookies = new Cookies();
             cookies.set("usuario", resultado.data.registrarUsuario.usuario.usuario);
@@ -132,10 +127,11 @@ class LoginPage extends React.Component {
                                             />
                                         </FormControl>
                                     </div>  
+                                    {this.state.errores}
                                     <Button className="d-block mx-auto mt-2" variant="contained" color="primary" onClick={this.handlerIniciarSesion}>
                                         Iniciar sesión
                                     </Button>
-                                    <Button className="d-block mx-auto mt-2" variant="contained" color="primary" onClick={() => this.setState({datosLogin: {}, enLoginORegistro: true})} >
+                                    <Button className="d-block mx-auto mt-2" variant="contained" color="primary" onClick={() => this.setState({datosLogin: {}, enLoginORegistro: true, errores: []})} >
                                         Crear cuenta
                                     </Button>
                                 </div>
@@ -217,6 +213,7 @@ class LoginPage extends React.Component {
                                         value={this.state.datosLogin.correo} 
                                         onChange={this.actualizarCampo} /> 
                                 </div>
+                                {this.state.errores}
                                 <div className="w-75 mx-auto"> 
                                     <Button 
                                         variant="contained" 
@@ -228,7 +225,6 @@ class LoginPage extends React.Component {
                             </Paper>
                         </div>
                     }
-                    {this.state.errores}
             </div>
         );
     }
